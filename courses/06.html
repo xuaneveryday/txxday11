@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta viewport>
+	<title>React tutorial</title>
+	<style type="text/css">
+		
+	</style>
+</head>
+<body>
+	
+	<div id="app"></div>
+
+	<script type="text/javascript" src="../bower_components/react/react.min.js"></script>
+	<script type="text/javascript" src="../bower_components/react/react-dom.min.js"></script>
+	<script type="text/javascript" src="../bower_components/react/browser.min.js"></script>
+	<script type="text/babel">
+		var ReactComponent=React.createClass({
+			getDefaultProps:function(){
+				console.log('step 1:初始化一些属性值');
+				return {
+					myProps:''
+				}
+			},
+			getInitialState:function(){
+				console.log('step 2:初始化一些状态值');
+				return {
+					result:''
+				}
+			},
+			componentWillMount:function(){
+				console.log('step 3:执行时间非常短，一般做ajax，打印，日志等');
+
+
+			},
+			handerChange:function(event){
+				var _v=event.target.value;	
+				this.setState({
+					REsult:_v
+				})
+			},
+			render:function(){
+				console.log('step 4:执行渲染');
+				return (
+					<div>
+						<h1>ReactComponent</h1>
+						<input type="" name="" id="input" onChange={this.handerChange}/>
+						<Child name={this.props.name}/>
+					</div>
+				)
+			},
+			componentDidMount:function(){
+				console.log('step 5:渲染成功，可以与第三方进行链接。。。');
+				document.getElementById('input').style.color="red";
+
+			}
+		})
+		
+		var Child=React.createClass({
+			componentWillReceiveProps:function(nextProps,nextState){
+				console.log('component Will Receive Props')
+			},
+			shouldComponentUpdate:function(nextProps,nextState){
+				console.log('should Component Update');
+				if(nextProps.name=='vane'){
+					return true;
+				}else{
+					return false;
+				}
+				
+			},
+			componentWillUpdate:function(){
+				console.log('will update child');
+			},
+			render:function(){
+				return (
+					<div>
+						<h1>这是一个子组建</h1>
+						<p>父组建的属性值：{this.props.name}</p>
+					</div>
+				)
+			},
+			componentDidMount:function(){
+				console.log('二次更新完毕')
+			}
+		})
+			
+
+		ReactDOM.render(<ReactComponent/>,document.getElementById('app'));
+	</script>
+</body>
+</html>

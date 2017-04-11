@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta viewport>
+	<title>React tutorial</title>
+	<style type="text/css">
+		
+	</style>
+</head>
+<body>
+	
+	<div id="app"></div>
+
+	<script type="text/javascript" src="../bower_components/react/react.min.js"></script>
+	<script type="text/javascript" src="../bower_components/react/react-dom.min.js"></script>
+	<script type="text/javascript" src="../bower_components/react/browser.min.js"></script>
+	<script type="text/javascript" src="../js/styleSheets.js"></script>
+	<script type="text/javascript" src="../js/globalFunction.js"></script>
+	<script type="text/babel">
+		var MessageBox=React.createClass({
+
+			render:function(){
+				//将样式内容设置为Object对象
+				var _css=this.CSS;
+				var _js=this.JS;
+				var style;
+				var s=100;
+				if(s>1000){
+					style={background:'red'};
+				}else{
+					style={background:'pink'}
+				}
+
+				return (
+					<div  style={style}>
+						{/* comment111 */}
+						<h2 style={styleSheets.h2}>无法修饰的一双手</h2>
+						<p style={_css.p}>
+							<button onClick={_js.action}>点击事件</button>
+							<button onTouchEnd={action.handlerTouch}>触摸结束</button>
+							带出温暖永远在背后
+							<input type="" name="" onChange={_js.handlerClick}/>
+						</p>
+					</div>	
+				)
+			}
+		});
+			
+		MessageBox.prototype.CSS={
+			p:{
+			color:"blue"
+			}
+		}
+		MessageBox.prototype.JS={
+			
+			handlerClick:function(){
+				alert(1)
+			},
+			handlerTouch:function(event){
+				console.log(event);
+				alert(2)
+			}
+
+		}
+
+		ReactDOM.render(<MessageBox/>,document.getElementById('app'));
+	</script>
+</body>
+</html>

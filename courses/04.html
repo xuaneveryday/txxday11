@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta viewport>
+	<title>React tutorial</title>
+	<style type="text/css">
+		
+	</style>
+</head>
+<body>
+	
+	<div id="app"></div>
+
+	<script type="text/javascript" src="../bower_components/react/react.min.js"></script>
+	<script type="text/javascript" src="../bower_components/react/react-dom.min.js"></script>
+	<script type="text/javascript" src="../bower_components/react/browser.min.js"></script>
+	<script type="text/babel">
+		var HeaderComponent=React.createClass({
+			handlerChange:function(event){
+				var val=event.target.value;
+				this.setState({result:val})
+			},
+			getInitialState:function(){
+				return {
+					result:''
+				}
+			},
+			onChildChanged:function(newState){
+				this.setState({
+					result:newState
+				})
+			},
+		 	render:function(){
+		 		var _this=this;
+		 		return (
+					<div>
+						<h1>Header Component</h1>
+						<input type="text" name="" onChange={this.handlerChange}/>
+						{this.state.result}
+						<Child name={this.state.result} callbackParent={this.onChildChanged}/>
+						<Child callbackParent={function(s){
+							_this.setState({result:s});
+						}}/>
+					</div>
+
+		 		)
+		 	}
+		});
+		var Child=React.createClass({
+			getInitialState:function(){
+				return {
+					result:''
+				}
+			},
+			handlerChange:function(event){
+				var _v=event.target.value;
+				this.props.callbackParent(_v);
+			},
+			render:function(){
+
+				return (
+					<div>
+						<h1>子组建</h1>
+						<input type="" name="" onChange={this.handlerChange}/>
+						<p>父的值：{this.props.name}</p>
+					</div>
+				)
+			}
+		})
+		ReactDOM.render(<HeaderComponent/>,document.getElementById('app'));
+	</script>
+</body>
+</html>

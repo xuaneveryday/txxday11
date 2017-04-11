@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1">
+	<title>React tutorial</title>
+	<style type="text/css">
+		
+	</style>
+</head>
+<body>
+	
+	<div id="app"></div>
+
+	<script type="text/javascript" src="../bower_components/react/react.min.js"></script>
+	<script type="text/javascript" src="../bower_components/react/react-dom.min.js"></script>
+	<script type="text/javascript" src="../bower_components/react/browser.min.js"></script>
+	<script type="text/babel">
+		var ReactComponent=React.createClass({
+
+			handerClick:function(){
+				if(num){
+					this.setState({type:'password'});
+					this.setState({text:'密文'});
+					num=false;
+				}else{
+					this.setState({type:'text'});
+					this.setState({text:'铭文'});
+					num=true
+				}
+			},
+			getDefaultProps:function(){
+				return {
+					price:18000
+				}
+			},
+			getInitialState:function(){
+				return {
+					result:"passworld",
+					type:"text",
+					text:"铭文"
+				}
+			},
+
+		 	render:function(){
+		 		var propsValue="Hello React";
+				console.log(this.state.result);
+				
+		 		return (
+					<div>
+						<h1>React Component</h1>
+						{propsValue}
+						<input type="" name="" value={this.props.name}/>
+						<br/>
+						<input type={this.state.type} name="" />
+						<br/>
+						<button onClick={this.handerClick}>{this.state.text}</button>
+					</div>
+		 		)
+		 	}
+		});
+		var num=true;
+		var value={name:"china xuan",age:24,sex:1};
+		ReactDOM.render(<ReactComponent {...value}/>,document.getElementById('app'));
+	</script>
+</body>
+</html>
